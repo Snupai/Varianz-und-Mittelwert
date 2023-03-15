@@ -28,12 +28,7 @@ namespace Varianz_und_Mittelwert
 
         static double Varianz(double[] messwerte)
         {
-            double mittelwert = 0;
-            foreach (double value in messwerte)
-            {
-                mittelwert += value;
-            }
-            mittelwert = mittelwert / messwerte.Length;
+            double mittelwert = Mittelwert(messwerte);
             double summe = 0;
             foreach (double value in messwerte)
             {
