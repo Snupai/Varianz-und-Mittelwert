@@ -10,9 +10,9 @@ namespace Varianz_und_Mittelwert
         static void Main(string[] args)
         {
             double[] messwerte = { 100, 99, 101, 102, 98 };
-
+            WriteLine(Mittelwert(messwerte));
             WriteLine(Varianz(messwerte));
-
+            WriteLine(Standardabweichung(messwerte));
             ReadKey();
         }
 
@@ -28,18 +28,19 @@ namespace Varianz_und_Mittelwert
 
         static double Varianz(double[] messwerte)
         {
-            double mittelwert = 0;
-            foreach (double value in messwerte)
-            {
-                mittelwert += value;
-            }
-            mittelwert = mittelwert / messwerte.Length;
+            double mittelwert = Mittelwert(messwerte);
             double summe = 0;
             foreach (double value in messwerte)
             {
                 summe += Math.Pow(value - mittelwert, 2);
             }
             return summe / (messwerte.Length - 1);
+        }
+
+        static double Standardabweichung(double[] messwerte)
+        {
+            double summe = Math.Round(Math.Sqrt(Varianz(messwerte)), 4);
+            return summe;
         }
 
         static void Example()
