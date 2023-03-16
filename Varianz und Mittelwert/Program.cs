@@ -47,6 +47,11 @@ namespace Varianz_und_Mittelwert
             return summe / (messwerte.Length - 1);
         }
 
+        /// <summary>
+        /// Errechnet die Standardabweichung für alle Werte eines Arrays.
+        /// </summary>
+        /// <param name="messwerte"></param>
+        /// <returns>Standardabweichung</returns>
         static double Standardabweichung(double[] messwerte)
         {
             double summe = Math.Round(Math.Sqrt(Varianz(messwerte)), 4);
