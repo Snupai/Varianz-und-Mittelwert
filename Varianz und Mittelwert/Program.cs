@@ -16,6 +16,11 @@ namespace Varianz_und_Mittelwert
             ReadKey();
         }
 
+        /// <summary>
+        /// Errechnet den Mittelwert für alle Werte eines Arrays.
+        /// </summary>
+        /// <param name="messwerte"></param>
+        /// <returns>Mittelwert</returns>
         static double Mittelwert(double[] messwerte)
         {
             double summe = 0;
@@ -26,6 +31,11 @@ namespace Varianz_und_Mittelwert
             return summe / messwerte.Length;
         }
 
+        /// <summary>
+        /// Errechnet die Varianz für alle Werte eines Arrays.
+        /// </summary>
+        /// <param name="messwerte"></param>
+        /// <returns>Varianz</returns>
         static double Varianz(double[] messwerte)
         {
             double mittelwert = Mittelwert(messwerte);
