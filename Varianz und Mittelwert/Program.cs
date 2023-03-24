@@ -7,13 +7,37 @@ namespace Varianz_und_Mittelwert
 {
     internal class Program
     {
+        static Random rnd = new Random();
         static void Main(string[] args)
         {
-            double[] messwerte = { 100, 99, 101, 102, 98 };
-            WriteLine(Mittelwert(messwerte));
-            WriteLine(Varianz(messwerte));
-            WriteLine(Standardabweichung(messwerte));
-            ReadKey();
+            while (true)
+            {
+                ArrayFüllen();
+                string str = ReadLine();
+                if (str == "s") break;
+            }
+        }
+
+        static void ArrayFüllen()
+        {
+            // Erstelle ein Random-Objekt
+            Random random = new Random();
+
+            // Erstelle ein double array mit 10000 Elementen
+            double[] array = new double[1_000_000];
+
+
+            // Fülle das array mit zufälligen Zahlen von -1000 bis +1000
+            for (int i = 0; i < array.Length; i++)
+            {
+                //array[i] = random.Next(-1000, 1000);
+                array[i] = -1_000 + 2_000 * random.NextDouble();
+            }
+            WriteLine($"Varianz:\t\t{Varianz(array)}");
+            WriteLine($"Mittelwert:\t\t{Mittelwert(array)}");
+            WriteLine($"Standardabweichung:\t{Standardabweichung(array)}");
+            WriteLine($"Max Wert:\t\t{array.Max()}");
+            WriteLine($"Min Wert:\t\t{array.Min()}");
         }
 
         /// <summary>
@@ -43,6 +67,7 @@ namespace Varianz_und_Mittelwert
             foreach (double value in messwerte)
             {
                 summe += Math.Pow(value - mittelwert, 2);
+                
             }
             return summe / (messwerte.Length - 1);
         }
