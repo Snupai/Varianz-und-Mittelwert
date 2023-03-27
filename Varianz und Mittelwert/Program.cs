@@ -1,7 +1,9 @@
-﻿using System.Diagnostics;
+﻿using System.Collections;
+using System.Diagnostics;
 using System.Globalization;
+using System.Reflection.Metadata;
 using static System.Console;
-using static Yann.wc;
+using static Yann.Wc;
 
 namespace Varianz_und_Mittelwert
 {
@@ -12,19 +14,26 @@ namespace Varianz_und_Mittelwert
         {
             while (true)
             {
-                ArrayFüllen();
+                double[] array = ArrayFüllen();
+                WriteLineColor($"<*!blue*>Varianz:\t\t{Varianz(array)}<*/!*>");
+                WriteLineColor($"<*!red*>Mittelwert:\t\t{Mittelwert(array)}<*/!*>");
+                WriteLineColor($"<*!blue*>Standardabweichung:\t{Standardabweichung(array)}<*/!*>");
+                WriteLineColor($"<*!red*>Max Wert:\t\t{array.Max()}<*/!*>");
+                WriteLineColor($"<*!blue*>Min Wert:\t\t{array.Min()}<*/!*>");
+                WriteLineColor($"<*!red*>Median:\t\t\t{Median(array)}<*/!*>");
                 string str = ReadLine();
                 if (str == "s") break;
             }
         }
 
-        static void ArrayFüllen()
+        static double[] ArrayFüllen()
         {
             // Erstelle ein Random-Objekt
             Random random = new Random();
 
             // Erstelle ein double array mit 10000 Elementen
-            double[] array = new double[1_000_000];
+            double[] array = new double[10_000_000];
+            //double[] array = new double[] { 1, 2, 3, 4, 5 };
 
 
             // Fülle das array mit zufälligen Zahlen von -1000 bis +1000
@@ -33,11 +42,8 @@ namespace Varianz_und_Mittelwert
                 //array[i] = random.Next(-1000, 1000);
                 array[i] = -1_000 + 2_000 * random.NextDouble();
             }
-            WriteLine($"Varianz:\t\t{Varianz(array)}");
-            WriteLine($"Mittelwert:\t\t{Mittelwert(array)}");
-            WriteLine($"Standardabweichung:\t{Standardabweichung(array)}");
-            WriteLine($"Max Wert:\t\t{array.Max()}");
-            WriteLine($"Min Wert:\t\t{array.Min()}");
+            return array;
+
         }
 
         /// <summary>
@@ -67,7 +73,7 @@ namespace Varianz_und_Mittelwert
             foreach (double value in messwerte)
             {
                 summe += Math.Pow(value - mittelwert, 2);
-                
+
             }
             return summe / (messwerte.Length - 1);
         }
@@ -81,6 +87,23 @@ namespace Varianz_und_Mittelwert
         {
             double summe = Math.Round(Math.Sqrt(Varianz(messwerte)), 4);
             return summe;
+        }
+
+        static double Median(double[] messwerte)
+        {
+            Array.Sort(messwerte);
+            int middleIndex = messwerte.Length / 2;
+
+            if (messwerte.Length % 2 == 1)
+            {
+                return messwerte[middleIndex];
+            }
+            else
+            {
+                double sum = messwerte[middleIndex - 1] + messwerte[middleIndex];
+                return sum / 2;
+            }
+
         }
 
         static void Example()

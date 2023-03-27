@@ -1,6 +1,6 @@
 ﻿namespace Yann
 {
-    public static class wc
+    public static class Wc
     {
         public static void WriteColor(string str)
         {
