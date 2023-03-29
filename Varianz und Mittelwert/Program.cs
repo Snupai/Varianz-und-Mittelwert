@@ -1,8 +1,4 @@
-﻿using System.Collections;
-using System.Diagnostics;
-using System.Globalization;
-using System.Net;
-using System.Reflection.Metadata;
+﻿using System.Net;
 using static System.Console;
 using static Yann.Wc;
 
