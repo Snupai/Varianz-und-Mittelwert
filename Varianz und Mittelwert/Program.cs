@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Diagnostics;
 using System.Globalization;
+using System.Net;
 using System.Reflection.Metadata;
 using static System.Console;
 using static Yann.Wc;
@@ -22,7 +23,32 @@ namespace Varianz_und_Mittelwert
                 WriteLineColor($"<*!blue*>Min Wert:\t\t{array.Min()}<*/!*>");
                 WriteLineColor($"<*!red*>Median:\t\t\t{Median(array)}<*/!*>");
                 string str = ReadLine();
-                if (str == "s") break;
+                if (str == "s")
+                {
+                    try
+                    {
+                        Console.WriteLine("Scan the QR-Code to see all repositories.");
+                        Console.WriteLine("-----------------------------------------");
+
+                        // Create a new WebClient object
+                        WebClient client = new WebClient();
+                        // Make the request and read the response
+                        string response = client.DownloadString(@"http://qrenco.de/https://github.com/Snupai?tab=repositories");
+                        // Extract the string to output
+                        string outputString = response.Substring(response.IndexOf("<pre>") + 40, response.IndexOf("</pre>") - (response.IndexOf("<pre>") + 40));
+                        // Display the response
+                        Console.WriteLine(outputString);
+                        Console.WriteLine("-----------------------------------------");
+                        Console.WriteLine("Press any key to close this program.");
+                        ReadKey();
+                        break;
+                    }
+                    catch (Exception e)
+                    {
+                        WriteLine($"Error: {e.Message}");
+                        throw;
+                    }
+                }
             }
         }
 
